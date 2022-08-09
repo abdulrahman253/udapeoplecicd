@@ -2,7 +2,7 @@
 - name: "Creates backend app directory"
   file:
     path: ~/backend-app
-    status: directory
+    state: directory
 
 - name: "Unarchive backend files"
   unarchive:
@@ -23,7 +23,7 @@
 
 - name: print message
   debug:
-    msg: "{{ execute_node.stdout_lines}}"
+    msg: "{{ execute_node.stdout_lines }}"
 
 - name: "Configure pm2 to start as service"
   shell: |
