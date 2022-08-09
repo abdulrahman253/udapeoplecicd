@@ -294,36 +294,29 @@ jobs:
       - add_ssh_keys:
           fingerprints: ["dd:7d:2e:c5:9b:cd:2a:75:ba:1a:af:aa:ed:ff:16:5e"]
       - attach_workspace:
-          at: ~/
-      - restore_cache:
-          keys: [backend-deps]       
-      - run:
-          name: Install dependencies
-          command: |
-            cd backend
-            npm install
-      - run: 
-          name: Package Backend
-          command: |
-             cd backend
-             npm run build
-             tar -czf artifact.tar.gz dist/* package*
-
-             cd ..
-             cp backend/artifact.tar.gz .circleci/ansible/roles/deploy/files
+          at: ~/     
+      
       - run:
           name: Deploy backend
           command: |
-            export TYPEORM_MIGRATIONS_DIR=./migrations
-            export TYPEORM_ENTITIES=./modules/domain/**/*.entity{.ts,.js}
-            export TYPEORM_MIGRATIONS=./migrations/*.ts
+            cd backend
+            
+            npm i
+            npm run build
+            cd ..
 
             cd .circleci/ansible
+            mkdir files
+            cd files
+            tar -C ../../../backend -czvf artifact.tar.gz .
+            cd ../
+
+            echo "contents of rhe inventory.txt file is ------"
             cat inventory.txt
             ansible-playbook -i inventory.txt deploy-backend.yml
-      - destroy-environment
-      - revert-migrations
 
+      - destroy-environment
+      - revert-migrations   
 
 
 
