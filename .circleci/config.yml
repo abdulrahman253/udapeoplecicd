@@ -384,24 +384,26 @@ jobs:
 
   #     - destroy-environmnet
   #     - revert-migrations           
-# cleanup:
-#     docker:
-#       # Docker image here
-#     steps:
-#       # Checkout code from git
-#       - run:
-#           name: Get old stack workflow id
-#           command: |
-#             # your code here
-#             export OldWorkflowID="the id here"
-#             export STACKS=[] #put the list of stacks here
-#       - run:
-#           name: Remove old stacks and files
-#           command: |
-#             if [[ "${STACKS[@]}" =~ "${OldWorkflowID}" ]]
-#             then
-#               # your code here
-#             fi
+  # cleanup:
+  #   docker:
+  #       - image: cimg/base:stable   
+  #   steps:
+  #     - checkout
+  #     - install_awscli
+  #     - install_nodejs 
+  #     - run:
+  #         name: Get old stack workflow id
+  #         command: |
+  #           # your code here
+  #           export OldWorkflowID="the id here"
+  #           export STACKS=[] #put the list of stacks here
+  #     - run:
+  #         name: Remove old stacks and files
+  #         command: |
+  #           if [[ "${STACKS[@]}" =~ "${OldWorkflowID}" ]]
+  #           then
+  #             # your code here
+  #           fi
             
 
 workflows:
