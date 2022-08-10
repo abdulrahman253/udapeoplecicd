@@ -378,6 +378,7 @@ jobs:
               --template-file .circleci/files/cloudfront.yml \
               --parameter-overrides WorkflowID="${CIRCLE_WORKFLOW_ID:0:7}" \
               --stack-name InitialStack
+              
       - destroy-environmnet
       - revert-migrations           
 # cleanup:
