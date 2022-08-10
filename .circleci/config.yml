@@ -335,7 +335,9 @@ jobs:
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --output text)
             export API_URL=http://${BACKEND_PUBLIC_IP}:3030
-            echo $
+            echo ${BACKEND_PUBLIC_IP}
+            echo backend-${CIRCLECI_WORKFLOW_ID:0:7}
+            echo ${API_URL}
             if curl -s $API_URL/api/status | grep "ok"
             then
               exit 0
@@ -346,7 +348,8 @@ jobs:
           name: Frontend smoke test
           command: |
             FRONTEND_WEBSITE=http://udapeople-${CIRCLE_WORKFLOW_ID:0:7}.s3-website.${AWS_DEFAULT_REGION}.amazonaws.com
-            if curl -s $FRONTEND_WEBSITE |grep "Welcome"
+            echo $FRONTEND_WEBSITE
+            if curl -s $FRONTEND_WEBSITE | grep "Welcome"
             then
               exit 1
             else
