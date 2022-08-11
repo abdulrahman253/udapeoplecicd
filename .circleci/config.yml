@@ -330,14 +330,6 @@ jobs:
       - install_nodejs
       - install_awscli
       - run:
-          name: Get backend url
-          command: |
-            pwd
-            cat .circleci/ansible/inventory.txt
-            cat ~/output.txt
-            export API_URL=`cat ~/output.txt`
-            echo "API_URL: $API_URL"
-      - run:
           name: Backend smoke test
           command: |
             BACKEND_PUBLIC_IP=$(aws ec2 describe-instances \
