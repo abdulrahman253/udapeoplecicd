@@ -364,9 +364,9 @@ jobs:
             echo $FRONTEND_WEBSITE
             if curl -s $FRONTEND_WEBSITE | grep "Welcome"
             then
-              exit 0
-            else
               exit 1
+            else
+              exit 2
             fi 
       - destroy-environment
       - revert-migrations         
