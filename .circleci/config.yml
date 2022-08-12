@@ -104,6 +104,10 @@ jobs:
            cd backend
            npm install
            npm run build
+      - persist_to_workspace:
+          root: .
+          paths:
+            - backend/dist     
              
       - save_cache:
           paths: [backend/node_modules]
