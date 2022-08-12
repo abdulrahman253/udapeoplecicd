@@ -19,9 +19,6 @@
     cd ~/backend-app/dist
     pm2 stop default
     pm2 start main.js
-    npm install forever -g
-    npm install ts-node -g
-    forever start -c "ts-node -r tsconfig-paths/register -r dotenv/config src/main.ts" ./
   register: execute_node
 
 - name: print message
