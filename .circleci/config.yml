@@ -412,7 +412,7 @@ jobs:
                 --stack-status-filter CREATE-COMPLETE --no-paginate --output text))
             echo Stack names: "${STACKS[@]}" 
 
-            export OLDWORKFLOWID=$(curl --insecure https://kvdb.io/${KVDB_BUCKET}/old_workflow_id)
+            export OldWorkflowID=$(curl --insecure https://kvdb.io/${KVDB_BUCKET}/old_workflow_id)
             echo Old Workflow ID: $OldWorkflowID
     
           
