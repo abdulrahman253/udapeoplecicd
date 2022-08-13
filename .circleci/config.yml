@@ -382,20 +382,19 @@ jobs:
       - run:
           name: Save Old Workflow ID to kvdb.io
           command: |
-            export Old__WorkflowID=$(aws cloudformation \
+            export OLD_WORKFLOW_ID=$(aws cloudformation \
                       list-exports --query "Exports[?Name==\'WorkflowID\'].Value" \
                       --no-paginate --output text)
-            echo "Old Workflow ID: $Old_Workflow_ID"
-            curl https://kvdb.io/${KVDB_BUCKET}/old_workflow_id -d "${Old_Workflow_ID}"           
+            echo "Old Workflow ID: $OLD_WORKFLOW_ID"
+            curl https://kvdb.io/${KVDB_BUCKET}/old_workflow_id -d "${OLD_WORKFLOW_ID}"           
       - run:
           name: Update cloudfront distribution
           command: |
             aws cloudformation deploy \
                   --template-file .circleci/files/cloudfront.yml \
-                  --stack-name IntialStacks \
-                  --region us-east-1
                   --parameter-overrides WorkflowID="${CIRCLE_WORKFLOW_ID:0:7}" \
-                  --tags project=udapeople
+                  --stack-name IntialStack 
+
       - destroy-environment
       - revert-migrations           
   cleanup:
