@@ -411,13 +411,9 @@ jobs:
                 --query "StackSummaries[*].StackName" \
                 --stack-status-filter CREATE-COMPLETE --no-paginate --output text))
             echo Stack names: "${STACKS[@]}" 
-            export OldworkflowID=$(curl --insecure https://kvdb.io/${KVDB_BUCKET}/old_workflow_id)
+            export OldWorkflowID=$(curl --insecure https://kvdb.io/${KVDB_BUCKET}/old_workflow_id)
             echo Old Workflow ID: $OldWorkflowID
-      - run: 
-          name: Remove old satcks and files
-          command: |
-            export OldworkflowID=$(curl --insecure https://kvdb.io/${KVDB_BUCKET}/old_workflow_id)
-            echo Old Workflow ID: $OldWorkflowID  
+       
             if [[ "${STACKS[@]}" =~ "${OldWorkflowID}" ]]
             then
               aws s3 rm "s3://udapeople-${OldWorkflowID}" --recursive
