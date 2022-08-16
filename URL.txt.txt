@@ -1,0 +1,15 @@
+https://github.com/abdulrahman253/udapeoplecicd    ///github
+
+
+http://udapeople-2f2f351.s3-website-us-east-1.amazonaws.com   ///s3 bucket
+
+
+https://dzio96dg53j76.cloudfront.net   ///cloudfront
+
+
+ec2-44-202-126-112.compute-1.amazonaws.com  /// prometheus
+
+
+ec2-44-205-130-10.compute-1.amazonaws.com  /// Backend
+
+
